@@ -25,8 +25,15 @@ const ModalFiles = ({
                     >VOLTAR</Text>
                     <FlatList 
                         data={list}
-                        renderItem={element => <Item name={element.item} onPress={onSelect} />}
-                        keyExtractor={item => item}
+                        renderItem={element => 
+                            <Item 
+                                name={element.item.filename} 
+                                size={element.item.size}
+                                type={element.item.type}
+                                onPress={onSelect}
+                            />
+                        }
+                        keyExtractor={item => item.index}
                         style={styles.flat}
                     />
                 </View>

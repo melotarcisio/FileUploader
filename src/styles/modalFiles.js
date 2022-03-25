@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },    
     back: {
         flex: 0.1,
-        backgroundColor: '#005295',
+        backgroundColor: '#ECDAD6',
         width: '100%',
         textAlignVertical: 'center',
         textAlign: 'center',
@@ -36,23 +36,29 @@ const styles = StyleSheet.create({
     },
     flat:{
         flex: 1,
-        backgroundColor: '#129632',
         width: '100%',
+    },
+    icon: {
+      alignSelf: 'center',
+      
     },
     item:{
         textAlignVertical: 'center',
         textAlign: 'left',
-        paddingLeft: '20%',
-        fontSize: 15
+        paddingLeft: 10,
+        fontSize: 20
     },
     itemTouch: {
+        flex: 1,
+        flexDirection: 'row',
         backgroundColor: '#d9b9e2',
         borderColor: '#8c19af',
         borderWidth: 2,
         borderRadius: 5,
-        marginBottom: 5,
+        marginBottom: 1,
         marginTop: 5,
-        paddingVertical: 10
+        paddingVertical: 10,
+        paddingLeft: 10
     },
 
 });

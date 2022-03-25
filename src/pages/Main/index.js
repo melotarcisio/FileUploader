@@ -8,10 +8,13 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { getData, storeData } from '~/services/AsyncStorage';
 import styles from './styles'
 
+import requestPermission from '~/services/RequestPermission'
+
 const Main = ({navigation}) => {
   let [pIp, setPIp] = useState('')
 
   useEffect(() => {
+    requestPermission()
     getData('@ip').then((lastIp)=>{
       setPIp(lastIp)
     })
@@ -20,6 +23,7 @@ const Main = ({navigation}) => {
   const submit = async (ip) => {
     ip = ip.match(/^\w+\.\w+/) ? `http://${ip}` : ip
     await storeData('@ip', ip);
+    console.log(ip)
     navigation.navigate('FileHandler')
   }
 
@@ -58,18 +62,17 @@ const Main = ({navigation}) => {
           placeholder={'http://000.000.0.0:0000'}
           value={values.ip}
           onChangeText={(text) => {
-            console.log(values.ip, values.ip.match(/\w+\.\w+\.\w+/) )
             setFieldValue('ip', text)
           }}
         />
         <TouchableOpacity 
           style={styles.button}
-          disabled={values.ip.match(/\w+\.\w+\.\w+/) ? false : true}
+          disabled={values.ip != null ? values.ip.match(/\w+\.\w+\.\w+/) ? false : true : false}
           onPress={handleSubmit}
         >
           <Text
             editable = {false}
-            style={{color: values.ip.match(/\w+\.\w+\.\w+/) ? '#363636' : '#D3D3D3'}}
+            style={{color: values.ip != null ? values.ip.match(/\w+\.\w+\.\w+/) ? '#363636' : '#D3D3D3' : '#D3D3D3'}}
           >Iniciar</Text>
         </TouchableOpacity>
       </ImageBackground>
