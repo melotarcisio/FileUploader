@@ -41,6 +41,13 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+__tests__/
+ios/
+android/.gradle
+android/gradle
+android/build
+android/app/build
+android/*.hprof
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
