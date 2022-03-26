@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     },
     modalView: {
       margin: 20,
-      backgroundColor: '#ECDAD6',
+      backgroundColor: '#d7c5ed',
       borderRadius: 20,
       padding: 20,
       width: '100%',
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },    
     back: {
         flex: 0.1,
-        backgroundColor: '#ECDAD6',
+        backgroundColor: '#d7c5ed',
         borderColor: '#8c19af',
         color: '#8c19af',
         borderWidth: 1,
@@ -40,10 +40,11 @@ const styles = StyleSheet.create({
     flat:{
         flex: 1,
         width: '100%',
-        backgroundColor: '#ECDAD6'
+        backgroundColor: '#d7c5ed'
     },
     icon: {
       alignSelf: 'center',
+      color: '#8c19af'
       
     },
     item:{
@@ -53,12 +54,13 @@ const styles = StyleSheet.create({
         paddingRight: 5,
         fontSize: 15,
         minWidth: 140,
-        maxWidth: 135
+        maxWidth: 135,
+        color: '#8c19af'
     },
     itemTouch: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: '#ECDAD6',
+        backgroundColor: '#d7c5ed',
         borderColor: '#8c19af',
         borderWidth: 4,
         borderRadius: 10,
@@ -69,7 +71,8 @@ const styles = StyleSheet.create({
     },
     size: {
       textAlign: 'right',
-      alignSelf: 'center'
+      alignSelf: 'center',
+      color: '#8c19af'
 
     },
 

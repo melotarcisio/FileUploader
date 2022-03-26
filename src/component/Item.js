@@ -13,7 +13,11 @@ const Item = ({
 }) => {
 
     const normalizeSize = size => {
-        if(size.match(/\D/)) return size
+        try{
+            if(size.includes('B')) return size
+        } catch (e) {
+            
+        }
         if(type.match(/(?:directory|return)/)) return ''
         if(size < 1024)
             return `${parseInt(size)} B`

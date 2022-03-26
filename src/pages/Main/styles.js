@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: '#fff',
+        color: '#8c19af',
         width: '80%',
         padding: 5,
         margin: 15,
