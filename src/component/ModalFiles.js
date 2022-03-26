@@ -30,6 +30,7 @@ const ModalFiles = ({
                                 name={element.item.filename} 
                                 size={element.item.size}
                                 type={element.item.type}
+                                path={element.item.path}
                                 onPress={onSelect}
                             />
                         }

@@ -8,11 +8,26 @@ const Item = ({
     name,
     type,
     size,
+    path,
     onPress
 }) => {
+
+    const normalizeSize = size => {
+        if(size.match(/\D/)) return size
+        if(type.match(/(?:directory|return)/)) return ''
+        if(size < 1024)
+            return `${parseInt(size)} B`
+        else if(size/1024 < 1024)
+            return `${parseInt(size/1024)} kB`
+        else if(size/1048576 < 1024)
+            return parseInt(size/1048576) + 'MB'
+        else
+            return parseInt(size/1073741824) + 'GB'
+    }
+
     return(
         <TouchableOpacity 
-            onPress={() => onPress({name:name, type:type})}
+            onPress={() => onPress({name:name, type:type, size:size, path:path})}
             style={styles.itemTouch}
         >
             <FontAwesomeIcon 
@@ -22,6 +37,7 @@ const Item = ({
             <Text style={styles.item}>
                 {name}
             </Text>
+            <Text style={styles.size}>{normalizeSize(size)}</Text>
         </TouchableOpacity>
     )
 }
