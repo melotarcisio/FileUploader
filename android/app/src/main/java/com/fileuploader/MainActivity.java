@@ -1,4 +1,5 @@
 package com.fileuploader;
+import android.content.Intent;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivity;
@@ -18,6 +19,11 @@ public class MainActivity extends ReactActivity {
     return "FileUploader";
   }
 
+  @Override
+  public void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    setIntent(intent);
+  }
 
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {

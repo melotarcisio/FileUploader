@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from 'react'
 import { getData, storeData } from '~/services/AsyncStorage'
 import styles from './styles'
-import RNFS from 'react-native-fs'
 import ModalFiles from '~/component/ModalFiles'
 import Button from '~/component/Button'
 import RNFetchBlob from 'rn-fetch-blob'
 import {moveNrename, getCloudDirectory, sendFile, getDirectory, selectDirectory} from './fileHandler'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUpload, faDownload } from '@fortawesome/free-solid-svg-icons'
+import IntentHandler from '~/component/ShareIntentHandler'
+
+import ReceiveSharingIntent from 'react-native-receive-sharing-intent'
 
 import {
-    Text, Image, ImageBackground, StatusBar, Modal, View
+    Text, ImageBackground, Modal, View
   } from 'react-native';
 
 export default function FileHandler ()  {
@@ -22,10 +24,21 @@ export default function FileHandler ()  {
     let [loading, setLoading] = useState(false)
     let [progress, setProgress] = useState('0%')
     let [cloudList, setCloudList] = useState([])
+    let [loadingIntent, setLoadingIntent] = useState(false)
+    let [listIntent, setListIntent] = useState([])
 
     useEffect(() => {
       getData('@ip').then((lastIp)=>{
         setPIp(lastIp)
+        ReceiveSharingIntent.getReceivedFiles(
+          files => {
+              if(files.length !== 0){
+                setListIntent(files)
+                setLoadingIntent(true)
+              }
+          }, 
+          (error) => console.log(error), 'appFileUploaderSharing'
+        )
       })
     })
 
@@ -78,8 +91,23 @@ export default function FileHandler ()  {
         resizeMode="cover"
       >
         <>
+          <IntentHandler 
+            files={listIntent}
+            pIp={pIp}
+            loading={loadingIntent}
+            setLoading={setLoadingIntent}          
+          />
           <Text onPress={() => {
-              getCloudDirectory('', pIp)
+              ReceiveSharingIntent.getReceivedFiles(files => {
+                // files returns as JSON Array example
+                //[{ filePath: null, text: null, weblink: null, mimeType: null, contentUri: null, fileName: null, extension: null }]
+                console.log('Received file:\n',files)
+              }, 
+              (error) =>{
+                console.log(error);
+              }, 
+              'appFileUploaderSharing' // share url protocol (must be unique to your app, suggest using your apple bundle id)
+              )
             }}>{'IP SELECIONADO:\t' + pIp}</Text>
           <Button
             text={'UPLOAD'}

@@ -26,14 +26,14 @@ const styles = StyleSheet.create({
     }, 
     modalLoading: {
       width: '100%',
-      paddingVertical: 250,
+      paddingVertical: '70%',
       paddingHorizontal: 20
 
     },
     viewModal: {
       width: '100%',
       height: '100%',
-      backgroundColor: '#ECDAD6',
+      backgroundColor: '#d7c5ed',
       borderColor: '#8c19af',
       borderWidth: 5,
       borderRadius: 30,

@@ -28,6 +28,18 @@ export function sendFile (path, ip) {
     )
 }
 
+export async function sendURL (url, ip) {
+    const req = await axios({
+        method: 'post',
+        baseURL: ip,
+        url: '/url',
+        headers: {
+            url
+        }
+    }) 
+    return req.data == 'Abrindo'
+}
+
 async function getMetaData(list, path) {
     //let object = await list.map(async (item) => (await RNFetchBlob.fs.stat(path + item)))
     let object = [{
@@ -64,12 +76,12 @@ export function selectDirectory ({name, type}, lastPath) {
 const getObjectByJSON = json => {
     let newJson = []
     for(let i in json){
-        console.log('item',i)
         newJson.push({
             filename: i,
             size: json[i].Size,
             type: 'file',
-            path: ''
+            path: '',
+            index: newJson.length
         })
     }
     return newJson

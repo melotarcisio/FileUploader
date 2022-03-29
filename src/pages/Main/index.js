@@ -1,22 +1,34 @@
 import React, {useEffect, useState} from 'react';
 import { Formik } from 'formik';
-
+import IntentHandler from '~/component/ShareIntentHandler'
 import {
   Text, Image, ImageBackground, StatusBar
 } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { getData, storeData } from '~/services/AsyncStorage';
 import styles from './styles'
+import ReceiveSharingIntent from 'react-native-receive-sharing-intent'
 
 import requestPermission from '~/services/RequestPermission'
 
 const Main = ({navigation}) => {
   let [pIp, setPIp] = useState('')
+  let [loadingIntent, setLoadingIntent] = useState(false)
+  let [listIntent, setListIntent] = useState([])
 
   useEffect(() => {
     requestPermission()
     getData('@ip').then((lastIp)=>{
       setPIp(lastIp)
+      ReceiveSharingIntent.getReceivedFiles(
+        files => {
+            if(files.length !== 0){
+              setListIntent(files)
+              setLoadingIntent(true)
+            }
+        }, 
+        (error) => console.log(error), 'appFileUploaderSharing'
+      )
     })
   })
 
@@ -55,6 +67,12 @@ const Main = ({navigation}) => {
           style={styles.logo}
           resizeMode="contain"
         />
+        <IntentHandler 
+            files={listIntent}
+            pIp={pIp}
+            loading={loadingIntent}
+            setLoading={setLoadingIntent}          
+          />
         <Text style={styles.welcome} >File Uploader</Text>
         <Text style={styles.instructions}>Selecione o IP do seu computador:</Text>
         <TextInput 
