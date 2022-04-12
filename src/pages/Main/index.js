@@ -76,9 +76,7 @@ const Main = ({navigation}) => {
             }}>
             File Uploader
           </Text>
-          <Text style={styles.instructions}>
-            Selecione o IP do seu computador:
-          </Text>
+          <Text style={styles.instructions}>Select your computer's IP:</Text>
           <TextInput
             style={styles.input}
             placeholder={'http://000.000.0.0:0000'}
@@ -114,7 +112,7 @@ const Main = ({navigation}) => {
                         : '#D3D3D3'
                       : '#D3D3D3',
                 }}>
-                Iniciar
+                Start
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -124,7 +122,7 @@ const Main = ({navigation}) => {
                 setModalRunning(modalRunning[0] === 1 ? [0] : [1]);
               }}>
               <Text editable={false} style={{color: '#363636'}}>
-                Pesquisar
+                Search
               </Text>
             </TouchableOpacity>
           </View>

@@ -28,13 +28,13 @@ const ModalSearch = ({isOpen, setClose, onSelect, run}) => {
       count++;
       switch (count % 3) {
         case 0:
-          setText('Procurando ..');
+          setText('Searching ..');
           break;
         case 1:
-          setText('Procurando ...');
+          setText('Searching ...');
           break;
         case 2:
-          setText('Procurando .');
+          setText('Searching .');
           break;
       }
     }, 500);
@@ -81,7 +81,7 @@ const ModalSearch = ({isOpen, setClose, onSelect, run}) => {
         onRequestClose={() => setClose()}>
         <View style={styles.modal}>
           <View style={styles.modalView}>
-            <Text>{text}</Text>
+            <Text style={{color: '#8c19af'}}>{text}</Text>
             <FlatList
               data={ipList}
               renderItem={element => (
@@ -93,8 +93,8 @@ const ModalSearch = ({isOpen, setClose, onSelect, run}) => {
                   style={styles.button}>
                   <FontAwesomeIcon icon={faComputer} style={styles.icon} />
                   <View>
-                    <Text>{element.item.name}</Text>
-                    <Text>{element.item.ip}</Text>
+                    <Text style={{color: '#8c19af'}}>{element.item.name}</Text>
+                    <Text style={{color: '#8c19af'}}>{element.item.ip}</Text>
                   </View>
                 </TouchableOpacity>
               )}
