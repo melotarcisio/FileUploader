@@ -15,6 +15,7 @@ const Main = ({navigation}) => {
   let [loadingIntent, setLoadingIntent] = useState(false);
   let [listIntent, setListIntent] = useState([]);
   let [modalSearch, setModalSearch] = useState(false);
+  let [modalRunning, setModalRunning] = useState([1]);
 
   useEffect(() => {
     requestPermission();
@@ -31,7 +32,7 @@ const Main = ({navigation}) => {
         'appFileUploaderSharing',
       );
     });
-  });
+  }, []);
 
   const submit = async ip => {
     ip = ip.match(/^\w+\.\w+/) ? `http://${ip}` : ip;
@@ -90,6 +91,7 @@ const Main = ({navigation}) => {
             isOpen={modalSearch}
             setClose={() => setModalSearch(false)}
             onSelect={selected => setFieldValue('ip', selected)}
+            run={modalRunning}
           />
           <View style={styles.buttonGroup}>
             <TouchableOpacity
@@ -117,7 +119,10 @@ const Main = ({navigation}) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => setModalSearch(true)}>
+              onPress={() => {
+                setModalSearch(true);
+                setModalRunning(modalRunning[0] === 1 ? [0] : [1]);
+              }}>
               <Text editable={false} style={{color: '#363636'}}>
                 Pesquisar
               </Text>
